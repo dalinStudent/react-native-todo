@@ -71,11 +71,20 @@ const Todo = () => {
 
   const deleteTask = taskId => {
     const task = todos.filter(item => item.id != taskId);
-    setTodo(task);
+    Alert.alert('Confirm', 'Are you sure to delete?', [
+      {
+        text: 'Yes',
+        onPress: () =>  setTodo(task),
+      },
+      {
+        text: 'No',
+      },
+    ]);
+   
   };
 
   const clearAllTodos = () => {
-    Alert.alert('Confirm', 'Clear todos?', [
+    Alert.alert('Confirm', 'Are you sure to delete all todos?', [
       {
         text: 'Yes',
         onPress: () => setTodo([]),

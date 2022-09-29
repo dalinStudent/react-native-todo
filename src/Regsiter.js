@@ -1,5 +1,4 @@
 import {useNavigation} from '@react-navigation/native';
-import { Link } from 'native-base';
 import React, {useState} from 'react';
 import {
   StyleSheet,
@@ -20,14 +19,14 @@ const Register = () => {
   const handleSubmit = () => {
     const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
-    if (password && email === '') {
+    if (!(password && email)) {
       setError('Username or Password should not be empty. Please try again.');
-    } else if (!password && cfPassword) {
+    } else if (password !== cfPassword) {
       setError('Password must be the same!.');
     } else if (!emailValid.test(email)) {
       setError('Email is invalid. Please try again.');
     } else {
-      navigation.navigate('Todo');
+      navigation.navigate('Login');
     }
   };
 
@@ -73,7 +72,7 @@ const Register = () => {
       </View>
       <TouchableOpacity style={styles.loginBtn} onPress={handleSubmit}>
         <Text style={styles.loginText}>SUBMIT</Text>
-          </TouchableOpacity>
+      </TouchableOpacity>
       <Text style={styles.error}>{error}</Text>
     </View>
   );
@@ -100,14 +99,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyContent: 'center',
     padding: 20,
+    color: 'black',
   },
   inputText: {
     height: 50,
-    color: 'white',
-  },
-  forgot: {
-    color: 'white',
-    fontSize: 11,
   },
   loginBtn: {
     width: '80%',
